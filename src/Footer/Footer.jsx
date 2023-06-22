@@ -8,7 +8,7 @@ function Footer() {
         <div className={style.footer}>
             <div className="row">
                 <div className="col-2 m-4">
-                    <h3>Categories</h3>
+                    <h3 className={style.title}>Categories</h3>
                     <ul>
                         <li>Graphic and Design</li>
                         <li>Digital Marketing</li>
@@ -23,7 +23,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="col-2 m-4">
-                    <h3>About</h3>
+                    <h3 className={style.title}>About</h3>
                     <ul>
                         <li>Career</li>
                         <li>Press and News</li>
@@ -35,7 +35,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="col-2 m-4">
-                    <h3>Support</h3>
+                    <h3 className={style.title}>Support</h3>
                     <ul>
                         <li>Help and Support</li>
                         <li>Trust and Safety</li>
@@ -44,7 +44,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="col-2 m-3">
-                    <h3>Community</h3>
+                    <h3 className={style.title}>Community</h3>
                     <ul>
                         <li>Events</li>
                         <li>Blog</li>
@@ -58,7 +58,7 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="col-2 m-4">
-                    <h3>More from Fiverr</h3>
+                    <h3 className={style.title}>More from Fiverr</h3>
                     <ul>
                         <li>Fiverr Business</li>
                         <li>Fiverr Pro</li>
@@ -75,7 +75,7 @@ function Footer() {
             </div>
             <div className="social">
                 <div className="socialFiverr">
-                    <p>Fiverr Internaltion 2023</p>
+                    <p className={style.logo}> Fiverr Internaltion 2023</p>
                 </div>
                 <div className="socialLogo">
                 </div>

@@ -8,7 +8,7 @@ import style from './header.module.scss'
 
 function Header() {
   const [career, setCareer] = useState([]);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const getCareer = async () => {
     try {
@@ -29,24 +29,23 @@ function Header() {
     <div className={style.header}>
       <div className={style.logo}>
         <div className={style.fiverr}>
-          <h3>fiverr</h3>
+          <h3 className={style.fiverr}>fiverr</h3>
         </div>
         <div className="auth">
-          Become a Seller
-          <button className={style.button}>Sign In</button>
-          <button>Join</button>
+          <span className={style.span}>Become a Seller</span>
+          <button className={style.sigIn}>Sign In</button>
+          <button className={style.join}>Join</button>
         </div>
       </div>
       <div className={style.content}>
         <h1>Find the perfect freelance services for your bussiness</h1>
-        <select name="" id="">
-          {career.map((item)=>{
+        <select onChange={e => navigate('/' + e.target.value)} name="" id="">
+          {career.map((item) => {
             return (
-              <option onChange={navigate(`/${item.id}`)} value={item.tenCongViec}>{item.tenCongViec}</option>
+              <option value={item.id}>{item.tenCongViec}</option>
             )
           })}
         </select>
-        
         <h3>Popular: Website Design, WordPress, Logo Design, Dropshipping</h3>
       </div>
 

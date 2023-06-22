@@ -12,7 +12,7 @@ function Explore() {
                     <img className={style.exploreImg } src="./img/meeting.jpg" alt="" />
                 </div>
                 <div className='col-7'>
-                    Kay Kim, Co-Fouder rooted
+                    <h3 className={style.title}>Kay Kim, Co-Fouder rooted</h3>
                     <p>It's extremely that Fiverr has freelancers from all over the world - it broadens the talent pool. One of the best thing about Fiverr is that while we're sleeping, someone's working</p>
                 </div>
             </div>
@@ -20,40 +20,40 @@ function Explore() {
                 <h2>Explore the marketplace</h2>
                 <div className="items row">
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faPenToSquare} /> <br />
-                        <span>Graphic and Design</span>
+                        <FontAwesomeIcon className={style.icon} icon={faPenToSquare} /> <br />
+                        <span className={style.span}>Graphic and Design</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faAddressCard} /> <br />
-                        <span>Digital Marketing</span>
+                        <FontAwesomeIcon className={style.icon} icon={faAddressCard} /> <br />
+                        <span className={style.span}>Digital Marketing</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faSignature} /> <br />
-                        <span>Writing and Translation</span>
+                        <FontAwesomeIcon className={style.icon} icon={faSignature} /> <br />
+                        <span className={style.span}>Writing and Translation</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faWallet} /> <br />
-                        <span>Video and Animation</span>
+                        <FontAwesomeIcon className={style.icon} icon={faWallet} /> <br />
+                        <span className={style.span}>Video and Animation</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faFax} /> <br />
-                        <span>Music and Radio</span>
+                        <FontAwesomeIcon className={style.icon} icon={faFax} /> <br />
+                        <span className={style.span}> Music and Radio</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faCode} /> <br />
-                        <span>Programing and Tech</span>
+                        <FontAwesomeIcon className={style.icon} icon={faCode} /> <br />
+                        <span className={style.span}>Programing and Tech</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faBusinessTime} /> <br />
-                        <span>Business</span>
+                        <FontAwesomeIcon className={style.icon} icon={faBusinessTime} /> <br />
+                        <span className={style.span}>Business</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faSnowflake} /> <br />
-                        <span>Life Style</span>
+                        <FontAwesomeIcon className={style.icon} icon={faSnowflake} /> <br />
+                        <span className={style.span}>Life Style</span>
                     </div>
                     <div className="kill col-2 text-center">
-                        <FontAwesomeIcon icon={faDatabase} /> <br />
-                        <span>Data</span>
+                        <FontAwesomeIcon className={style.icon} icon={faDatabase} /> <br />
+                        <span className={style.span}>Data</span>
                     </div>
                 </div>
             </div>
