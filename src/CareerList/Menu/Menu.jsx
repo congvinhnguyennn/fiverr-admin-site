@@ -1,60 +1,89 @@
-import React, { useState, useEffect } from 'react'
-import { getCareermenu } from "../../API/careerAPI"
+import React, { useState, useEffect } from "react";
+import { getCareermenu, getCareerfromMenu } from "../../API/careerAPI";
+import { Button, Dropdown } from "antd";
+import { Menu as MenuComponent } from "antd";
+import style from "./Menu.module.scss"
+
 
 function Menu() {
-  const [menu, setMenu] = useState([])
+  const [menu, setMenu] = useState([]);
+  const [carerr, setCareer] = useState([]);
   const getMenu = async () => {
     try {
       const data = await getCareermenu();
-      setMenu(data.content)
+      setMenu(data.content);
       console.log(data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+
+  const getCareerdetailmenu = async (idCareer) => {
+    try {
+      const data = await getCareerfromMenu(idCareer);
+      setCareer(data.content)
+      console.log(data);
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  console.log(menu);
+  const items = menu?.map((item) => {
+    return {
+      key: item.id,
+      label: item.tenLoaiCongViec,
+      children: item.dsNhomChiTietLoai?.map((subMenu) => {
+        return {
+          type: "group",
+          label: subMenu.tenNhom,
+          children: subMenu.dsChiTietLoai?.map((menuChildren) => {
+            return {
+              key: menuChildren.id,
+              label: (<p onClick={() => getCareerdetailmenu(menuChildren.id)}>{menuChildren.tenChiTiet}</p>)
+
+            };
+          }),
+        };
+      }),
+    };
+  });
   useEffect(() => {
     getMenu();
+    getCareerdetailmenu();
   }, {});
 
-
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        {menu.map((item) => {
-          return (
-            <div className="container-fluid">
-              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon" />
-              </button>
-              <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                <ul className="navbar-nav">
-                  <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-content dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      {item.tenLoaiCongViec}
-                    </a>
-                    <ul className="dropdown-menu dropdown dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                      {item.dsNhomChiTietLoai.map((itemType) => {
-                        return (
-                          <>
-                            <li className="dropdown-content dropdown">{itemType.tenNhom}</li>
-                            <li>Another action</li>
-                          </>
-                        )
-                      })}
+    <div className={style.menu}>
+      <nav className="navbar navbar-expand-lg navbar-dark ">
+        <div className="w-100">
+          <MenuComponent mode="horizontal" items={items} />;
+        </div>
 
-                    </ul>
-                  </li>
-                </ul>
+      </nav>
+      <div className="careerContent row">
+        {carerr.map((item, index) => {
+          return (
+            <div className={`${style.careerItem} col-4`} >
+              <div key={index} className={`${style.careerItem} card`}>
+                <img className="card-img-top" src={item.congViec.hinhAnh} alt="Card image cap" />
+                <div className="card-body">
+                  <img className={style.avatar} src={item.avatar} alt="Card image cap" />
+                  <h3 className="card-title">{item.tenChiTietLoai}</h3>
+                  <p className="card-text">{item.congViec.moTaNgan}</p>
+                  <p>{`Vote:  ${item.congViec.danhGia}/1000`}</p>
+                  <p>{`Starting: ${item.congViec.giaTien}$`}</p>
+                </div>
               </div>
             </div>
+
           )
         })}
 
-      </nav>
-
+      </div>
     </div>
-
-  )
+  );
 }
 
-export default Menu
+export default Menu;

@@ -19,7 +19,9 @@ function CareerDetail({ careerId }) {
     getCareerdetail();
   }, []);
   return (
+    
     <div className={`${style.card} row`}>
+      <p className={style.title}>Your Carerr Finding:</p>
       <div className={`${style.cardItem} card col-3`} style={{ width: '18rem' }}>
         <img src={career.hinhAnh} className={`${style.img} card-img-top`} alt="..." />
         <div className="card-body">

@@ -21,3 +21,8 @@ export const getCareermenudetail = async () =>{
     const { data } = await axiosClient.get("/api/cong-viec/lay-cong-viec-theo-chi-tiet");
     return data;
 }
+
+export const getCareerfromMenu = async (idCareer) => {
+    const {data} = await axiosClient.get(`/api/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${idCareer}`);
+    return data;
+}
