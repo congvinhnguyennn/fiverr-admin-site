@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DetailWork from "./modules/Detail_Work/DetailWork";
+// import Home from './Home/Home'
+import Type_Detail from "./modules/TypeWork_DetailType/Type_Detail";
+import Mainlayout from "./layouts/Mainlayout";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <Suspense fallback={<h1>loading...</h1>}>
+    //   <BrowserRouter>
+    //     <Routes>
+    //       <Route path="/" element={<Mainlayout/>}>
+    //         <Route index element={<Home/>}/>
+    //       </Route>
+    //     </Routes>
+    //   </BrowserRouter>
+    // </Suspense>
+    <Suspense fallback={<h1>loading...</h1>}>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Mainlayout/>}>
+          <Route path="/detail" element={<DetailWork/>}/>
+        </Route>
+      </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
 }
 
