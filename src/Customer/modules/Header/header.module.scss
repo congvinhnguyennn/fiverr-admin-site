@@ -1,0 +1,56 @@
+.logo {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 50px 10px 50px;
+}
+
+.button {
+    border: none;
+}
+
+.header {
+    background-image: url(../../../../public/img/giang.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 450px;
+    margin: 0 0 10px 0;
+    padding-bottom: 60px;
+}
+
+.content{
+    width: 50%;
+    margin-top: 50px;
+    padding-left: 50px;
+
+}
+
+.input{
+    border-radius: 10px;
+    border: none;
+    width: 400px;
+}
+
+
+.fiverr{
+    font-family: Macan,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 90px;
+}
+
+.sigIn{
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(179, 255, 0);
+}
+
+.join{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.span{
+    font-size: 20px;
+    color:rgb(179, 255, 0) ;
+}

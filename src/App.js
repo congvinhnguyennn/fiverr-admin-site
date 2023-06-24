@@ -1,40 +1,40 @@
-import { createTheme, ThemeProvider } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignIn from "features/auth/pages/SignIn";
-import Manage from "features/manage/pages/Manage";
-import User from "features/manage/common/components/User";
-import Job from "features/jobs/pages/Job";
-import JobTypes from "features/jobTypes/pages/JobTypes";
-import JobTypeDetails from "features/jobTypeDetails/pages/JobTypeDetails";
-import Service from "features/service/pages/Service";
-import Profile from "features/auth/pages/Profile";
+import SignIn from "Admin/features/auth/pages/SignIn";
+import Manage from "Admin/features/manage/pages/Manage";
+import User from "Admin/features/manage/common/components/User";
+import Job from "Admin/features/jobs/pages/Job";
+import JobTypes from "Admin/features/jobTypes/pages/JobTypes";
+import JobTypeDetails from "Admin/features/jobTypeDetails/pages/JobTypeDetails";
+import Service from "Admin/features/service/pages/Service";
+import Profile from "Admin/features/auth/pages/Profile";
+import Home from "Customer/modules/Home/Home";
+import CareerList from "Customer/modules/CareerList/CareerList";
+import DetailWork from "Customer/modules/Detail_Work/DetailWork";
+import Type_Detail from "Customer/modules/TypeWork_DetailType/Type_Detail";
+import Mainlayout from "Customer/layouts/Mainlayout";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "rgb(29, 191, 115)",
-      contrastText: "#fff",
-    },
-  },
-});
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <div className="App">
-          <Outlet />
-        </div>
         <BrowserRouter>
             <Routes>
-                <Route index element={<SignIn />} />
+
+                <Route path="/" element={<Home />} />
+                <Route path="/:careerId" element={<CareerList />} />
+
+                <Route path="/:careerId/:workId" element={<DetailWork />} />
+                <Route path="/" element={<Mainlayout/>}>
+                  <Route path="/detail" element={<DetailWork/>}/>
+                </Route>
+
+                <Route index path="/admin" element={<SignIn />} />
                   <Route path="manage/" element={<Manage />}>
                     <Route
                       index
                       element={
-                        <p style={{ fontSize: 20, marginTop: 48, fontWeight: 600 }}>
+                        <p style={{ fontSize: 20, marginTop: 100, marginLeft: "40%", fontWeight: 600 }}>
                           Vui lòng chọn danh mục muốn quản lý
                         </p>
                       }
@@ -48,8 +48,6 @@ function App() {
                   </Route>
             </Routes>
           </BrowserRouter>
-      </ThemeProvider>
-    </>
   );
 }
 

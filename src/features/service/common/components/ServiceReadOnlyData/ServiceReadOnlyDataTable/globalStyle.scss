@@ -1,8 +1,0 @@
-@import "assets/scss/base.scss";
-
-.jobReadOnlyDataTable {
-  p {
-    @include limitLine(3);
-    max-width: 260px;
-  }
-}
