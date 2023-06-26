@@ -19,7 +19,7 @@
 
 .content{
     width: 50%;
-    margin-top: 50px;
+    margin-top: 10px;
     padding-left: 50px;
 
 }
@@ -32,8 +32,10 @@
 
 
 .fiverr{
-    font-family: Macan,Helvetica Neue,Helvetica,Arial,sans-serif;
-    font-size: 90px;
+   
+}
+.fiverr img {
+    width: 100px;
 }
 
 .sigIn{
@@ -53,4 +55,5 @@
 .span{
     font-size: 20px;
     color:rgb(179, 255, 0) ;
+    margin-right: 10px;
 }

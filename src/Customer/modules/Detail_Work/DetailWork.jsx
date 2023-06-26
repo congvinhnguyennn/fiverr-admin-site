@@ -1,7 +1,39 @@
 import React,{useState,useEffect} from 'react'
-import { WorkAPI,CommentAPI } from '../../apis/work';
+import { WorkAPI,CommentAPI,PostCommentAPI } from 'Customer/apis/work';
+import { getCareerdetailAPI } from 'Customer/apis/careerAPI';
+import { useForm } from "react-hook-form";
+import { useDispatch,useSelector } from 'react-redux'
 import {AiFillLike,AiFillDislike,AiFillClockCircle,AiOutlineCheck,AiOutlineArrowDown} from "react-icons/ai"
-function DetailWork() {
+function DetailWork({careerId}) {
+    const { isAuth } = useSelector((state) => state.userReducer);
+    const obj=careerId;
+    const parse=parseInt(obj.careerId)
+    const com=3000;
+    const currentUser = useSelector((state) => state.userReducer.user)
+    const maNguoiDung=currentUser && currentUser.user.id
+    const {register,handleSubmit}=useForm({
+    defaultValues: {
+      id:com,
+      maCongViec:parse,
+      maNguoiBinhLuan:maNguoiDung,
+      ngayBinhLuan:"20/02/2023",
+      noiDung:"",
+      saoBinhLuan:5
+    },
+    })
+    const onSubmit =async (values) => {
+        const data = await PostCommentAPI(values);
+  };
+
+  const onError = (errors) => {
+    console.log(errors);
+  };
+  const handleButtonClick = () => {
+    // Perform some actions here
+
+    // Refresh the page
+    window.location.reload();
+  }
     const [selectedOption, setSelectedOption] = useState('Basic');
 
     const handleLabelClick = (option) => {
@@ -41,7 +73,8 @@ function DetailWork() {
                                     <span className='bg-transparent border-none inline-block m-0 p-0'>
                                         <AiOutlineCheck/>
                                     </span>
-                                    Design Customization
+                                    Design Customization.
+    
                                 </li>
                                 <li className='d-flex align-items-center'>
                                     <span className='bg-transparent border-none inline-block m-0 p-0'>
@@ -211,7 +244,7 @@ function DetailWork() {
     const [comment,setComment]=useState([]);
     const getComment=async()=>{
         try {
-            const data=await CommentAPI()
+            const data=await CommentAPI(parse)
             setComment(data.content);
         } catch (error) {
             console.log(error);
@@ -223,7 +256,7 @@ function DetailWork() {
     const [work,setWork]=useState([]);
     const getWork=async()=>{
         try {
-            const data=await WorkAPI()
+            const data=await WorkAPI(parse)
             setWork(data.content)
         } 
         catch (error) {
@@ -239,6 +272,19 @@ function DetailWork() {
  const tenNguoiTao=work.map((item)=>{
     return item.tenNguoiTao
  })
+ const [career, setCareer] = useState({})
+  const getCareerdetail = async () => {
+    try {
+      const data = await getCareerdetailAPI(parse);
+      setCareer(data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getCareerdetail();
+  }, []);
    const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight
@@ -280,7 +326,7 @@ function DetailWork() {
         <div className='row'>
             <div className='col-lg-8 col-12'>
                 {/* <h3>{work && work[0].congViec.tenCongViec}</h3> */}
-                <h3>I will do premium color correction and color grading</h3>
+                <h3>{career.tenCongViec}</h3>
                 <div className='d-flex align-items-center'>
                     <div className='mr-4'>
                         <img className='work && work[0]ect-fit-cover rounded-circle h-20' src={avatar} alt="" />
@@ -310,7 +356,7 @@ function DetailWork() {
                 </div>
                 <div className='mt-3'>
                     {/* <img className='w-full' src={work && work[0].congViec.hinhAnh} alt="" /> */}
-                    <img className='w-full' src="https://fiverrnew.cybersoft.edu.vn/images/cv31.jpg" alt="" />
+                    <img className='w-full' src={career.hinhAnh} alt="" />
                 </div>
                  {windowSize.width <=768 && (price())}
                 <div className='mt-5'>
@@ -319,7 +365,7 @@ function DetailWork() {
                 </div>
                 <div>
                     {/* {work && work[0].congViec.moTa} */}
-                    Please MESSAGE ME before placing any order. I'm Subhadip Mondal, a colorist from India. I’m looking forward to giving your short films, music videos, commercials and even feature films, the Hollywood Level cinematic look it deserves. I take all my clients and their projects seriously and I believe in providing them with smooth communication and complete peace of mind.
+                    {career.moTa}
                 </div>
                 <div className='mt-2'>
                     <p className='font-bold'>I will do the work until you are satisfied with fast and responsive communication</p>
@@ -571,6 +617,20 @@ function DetailWork() {
                             </ul>
                         </div>
                     </div>
+                    { isAuth? (<div className='comment'>
+                         <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <div className="mb-3">
+          <input
+            type="text"
+            placeholder="comment"
+             {...register("noiDung")}
+          />
+        </div>
+
+        
+        <button className="btn btn-success" onClick={handleButtonClick}>Comment</button>
+      </form>
+                    </div>) : (<p>Vui lòng đăng nhập để comment</p>)}
                 </div>
             </div>
             {windowSize.width > 768 && (price())}

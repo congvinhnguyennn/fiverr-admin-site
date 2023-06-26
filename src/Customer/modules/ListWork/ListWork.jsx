@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getCareermenu, getCareerfromMenu } from "../../../apis/careerAPI";
+import { getCareermenu,getCareerfromMenu } from "Customer/apis/careerAPI";
 import { Button, Dropdown } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Menu as MenuComponent } from "antd";
-import style from "./Menu.module.scss"
+import style from "./ListWork.module.scss"
 
 
-function Menu() {
+function ListWork({idCareer}) {
+    const obj=idCareer;
+    const parse=parseInt(obj.ID)
   const navigate=useNavigate()
   const [menu, setMenu] = useState([]);
   const [carerr, setCareer] = useState([]);
@@ -20,10 +22,9 @@ function Menu() {
     }
   };
 
-
-  const getCareerdetailmenu = async (idCareer) => {
+  const getCareerdetailmenu = async () => {
     try {
-      const data = await getCareerfromMenu(idCareer);
+      const data = await getCareerfromMenu(parse);
       setCareer(data.content)
       console.log(data);
     } catch (error) {
@@ -34,7 +35,7 @@ function Menu() {
   const items = menu?.map((item) => {
     return {
       key: item.id,
-      label: (<p onClick={()=>{navigate(`/categories/${item.id}`)}}>{item.tenLoaiCongViec}</p>),
+      label: item.tenLoaiCongViec,
       children: item.dsNhomChiTietLoai?.map((subMenu) => {
         return {
           type: "group",
@@ -63,11 +64,11 @@ function Menu() {
         </div>
 
       </nav>
-      {/* <div className="careerContent row">
+      <div className={`${style.careerContent} row`}>
         {carerr.map((item, index) => {
           return (
             <div className={`${style.careerItem} col-4`} >
-              <div key={index} className={`${style.careerItem} card`}>
+              <div key={index} className={`${style.careerItem} card`} onClick={()=>{navigate(`/detail/${item.id}`)}}>
                 <img className="card-img-top" src={item.congViec.hinhAnh} alt="Card image cap" />
                 <div className="card-body">
                   <img className={style.avatar} src={item.avatar} alt="Card image cap" />
@@ -82,9 +83,9 @@ function Menu() {
           )
         })}
 
-      </div> */}
+      </div>
     </div>
   );
 }
 
-export default Menu;
+export default ListWork;

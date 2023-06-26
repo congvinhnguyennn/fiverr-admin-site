@@ -1,8 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import { detailTypeAPI } from '../../apis/detaliType';
+import { useNavigate } from 'react-router-dom';
 import {AiOutlineArrowDown} from "react-icons/ai"
 import Collapse from 'react-collapse';
 function DetailType({typeWorkID}) {
+     const obj=typeWorkID;
+    const parse=parseInt(obj.id)
      const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight
@@ -24,7 +27,7 @@ function DetailType({typeWorkID}) {
     const [detail,setDetail]=useState([])
     const getDetail=async()=>{
         try{
-            const data=await detailTypeAPI();
+            const data=await detailTypeAPI(parse);
             setDetail(data.content)
         }
         catch(error){
@@ -41,6 +44,11 @@ function DetailType({typeWorkID}) {
     updatedItems[index] = !updatedItems[index];
     setExpandedItems(updatedItems);
   };
+  const navigate=useNavigate()
+  const handleNavigate=(id)=>
+  {
+    navigate(`/list/${id}`)
+  }
      const list=()=>{
     if(windowSize.width < 46.25*16)
     {
@@ -58,7 +66,7 @@ function DetailType({typeWorkID}) {
                                  {expandedItems[index] && (
                                     <div className='mt-3'>
                                          {item.dsChiTietLoai.map((type)=>{
-                                        return <p key={type.id}>
+                                        return <p className='cursor-pointer' onClick={()=>handleNavigate(type.id)} key={type.id}>
                                                 {type.tenChiTiet}
                                                 </p>
                                     })}
@@ -79,7 +87,7 @@ function DetailType({typeWorkID}) {
         <img className='h-40' src={item.hinhAnh} alt="" />
         <h4>{item.tenNhom}</h4>
         {item.dsChiTietLoai.map((type)=>{
-            return <p key={type.id}>
+            return <p className='cursor-pointer' onClick={()=>handleNavigate(type.id)} key={type.id}>
                 {type.tenChiTiet}
             </p>
         })}

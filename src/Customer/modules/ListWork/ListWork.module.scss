@@ -1,14 +1,18 @@
-.avatar{
+.avatar {
     width: 40px;
     height: 30px;
     border-radius: 50%;
 }
 
-.careerItem{
+.careerItem {
     height: 100px;
+    cursor: pointer;
 }
 
-.menu{
+.menu {
     margin: 50px;
     padding-bottom: 50px;
+}
+.careerContent{
+    margin-bottom: 30rem;
 }

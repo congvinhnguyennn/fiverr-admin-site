@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { getCareerdetailAPI } from '../../../apis/careerAPI';
 import style from "./CareerDetail.module.scss"
+import { useNavigate } from 'react-router-dom';
 
 function CareerDetail({ careerId }) {
+  const navigate=useNavigate()
   const [career, setCareer] = useState({})
-
   const getCareerdetail = async () => {
     try {
       const data = await getCareerdetailAPI(careerId);
@@ -22,7 +23,7 @@ function CareerDetail({ careerId }) {
     
     <div className={`${style.card} row`}>
       <p className={style.title}>Your Carerr Finding:</p>
-      <div className={`${style.cardItem} card col-3`} style={{ width: '18rem' }}>
+      <div className={`${style.cardItem} card col-3 cursor-pointer`} style={{ width: '18rem' }} onClick={()=>{navigate(`/detail/${careerId}`)}}>
         <img src={career.hinhAnh} className={`${style.img} card-img-top`} alt="..." />
         <div className="card-body">
           <p className="card-title">{career.tenCongViec}</p>

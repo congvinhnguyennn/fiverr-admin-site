@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@media only screen and (min-width:46.25em) and (max-width:63.9375em) {
+  .list-work {
+    flex-direction: column;
+  }
+
+  .detail-work {
+    padding: 2rem;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@media only screen and (max-width:46.8175em) {
+  .list-work {
+    flex-direction: column;
+  }
+
+  .detail-work {
+    padding: 1rem;
+  }
+
+  .rating {
+    font-size: 14px;
+  }
+
+  .thanh {
+    height: 0.5rem;
+  }
+  .auth{
+    flex-direction: column;
+    display: flex;
+  }
+}
+.accordion-content {
+  display: none;
+}
+
+.accordion-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.accordion-btn:focus {
+  outline: none;
+}
+
+.accordion-btn.active {
+  font-weight: bold;
+}
+
+.accordion-btn.active+.accordion-content {
+  display: block;
 }

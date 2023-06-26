@@ -17,7 +17,7 @@ function TypeWork({typeWorkID}) {
   return (
     <div>
       <div
-      className="mt-4 bg-cover bg-center bg-gradient-to-b text-center from-blue-500 to-blue-800 text-black py-4 px-6 h-3xl"
+      className="mt-5 bg-cover bg-center bg-gradient-to-b text-center from-blue-500 to-blue-800 text-black py-4 px-6 h-3xl"
       >
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold">Welcome to Fiverr!</h1>

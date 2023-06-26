@@ -7,5 +7,24 @@ const axiosClient = axios.create({
     
     }
 });
+axiosClient.interceptors.request.use((config)=>{
+   // config chứa thông tin của request từ client gửi lên server
 
+   const user=JSON.parse(localStorage.getItem('user'));
+   if(user)
+   {
+    config.headers.token=`${user.token}`
+   }
+   return config;
+})
+axiosClient.interceptors.response.use((response)=>{
+  return response;
+},(error)=>{
+  //Xử lý những error chung. VD: lỗi 401
+  if(error.response.status===401)
+  {
+    localStorage.removeItem('user');
+    window.location.href="/Signin";
+  }
+})
 export default axiosClient;

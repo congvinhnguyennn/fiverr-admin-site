@@ -4,7 +4,7 @@ import jobTypeDetailsReducer from "Admin/features/jobTypeDetails/jobTypeDetailsS
 import jobTypesReducer from "Admin/features/jobTypes/jobTypesSlice";
 import manageReducer from "Admin/features/manage/manageSlice";
 import serviceReducer from "Admin/features/service/serviceSlice";
-
+import userReducer from "../../Customer/slice/UserSlice";
 const rootReducer = {
   authReducer: authReducer,
   manageReducer: manageReducer,
@@ -12,6 +12,7 @@ const rootReducer = {
   jobTypesReducer: jobTypesReducer,
   jobTypeDetailsReducer: jobTypeDetailsReducer,
   serviceReducer: serviceReducer,
+  userReducer: userReducer,
 };
 
 export default rootReducer;

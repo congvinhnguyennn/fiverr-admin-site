@@ -14,7 +14,11 @@ import CareerList from "Customer/modules/CareerList/CareerList";
 import DetailWork from "Customer/modules/Detail_Work/DetailWork";
 import Type_Detail from "Customer/modules/TypeWork_DetailType/Type_Detail";
 import Mainlayout from "Customer/layouts/Mainlayout";
-
+import DetailMain from "Customer/modules/Detail_Work/DetailMain";
+import ListWork from "Customer/modules/ListWork/ListWork";
+import ListMain from "Customer/modules/ListWork/ListMain";
+import AuthLayout from "Customer/layouts/AuthLayout/AuthLayout";
+import Signin from "Customer/modules/Auth/Signin";
 
 function App() {
   return (
@@ -22,13 +26,13 @@ function App() {
             <Routes>
 
                 <Route path="/" element={<Home />} />
+                <Route path="/categories/:id" element={<Type_Detail/>}/>
                 <Route path="/:careerId" element={<CareerList />} />
-
-                <Route path="/:careerId/:workId" element={<DetailWork />} />
-                <Route path="/" element={<Mainlayout/>}>
-                  <Route path="/detail" element={<DetailWork/>}/>
+                <Route path="/detail/:careerId" element={<DetailMain />} />
+                <Route path="/list/:ID" element={<ListMain/>}/>
+                <Route path="/" element={<AuthLayout/>}>
+                  <Route path="/Signin" element={<Signin/>}/>
                 </Route>
-
                 <Route index path="/admin" element={<SignIn />} />
                   <Route path="manage/" element={<Manage />}>
                     <Route
