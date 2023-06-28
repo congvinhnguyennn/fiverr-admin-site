@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { detailTypeAPI } from '../../apis/detaliType';
+import { typeWorkAPI } from 'Customer/apis/typeWork';
 import { useNavigate } from 'react-router-dom';
 import {AiOutlineArrowDown} from "react-icons/ai"
 import Collapse from 'react-collapse';
@@ -37,6 +38,19 @@ function DetailType({typeWorkID}) {
     useEffect(()=>{
         getDetail()
     },[])
+    const [typeWork,setTypeWork]=useState([]);
+  const getTypeWork=async()=>{
+    try{
+      const data=await typeWorkAPI(parse);
+      setTypeWork(data.content)
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+    useEffect(() => {
+    getTypeWork();
+  }, []);
    const [expandedItems, setExpandedItems] = useState([]);
 
   const handleToggle = (index) => {
@@ -101,7 +115,7 @@ function DetailType({typeWorkID}) {
   return (
     <div>
         <div className='mt-3'>
-            <h4 className='pl-3'>Explore</h4>
+            <h4 className='pl-3'>Explore {typeWork.tenLoaiCongViec}</h4>
              {list()}
         </div>
     </div>

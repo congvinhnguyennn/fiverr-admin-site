@@ -6,7 +6,6 @@ import Header from '../CareerList/Header/HeaderDetail'
 import Footer from '../Footer/Footer'
 function Type_Detail() {
     const typeWorkID=useParams()
-    console.log(typeWorkID);
   return (
     <div>
        <Header/>

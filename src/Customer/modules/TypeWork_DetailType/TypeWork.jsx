@@ -1,10 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import { typeWorkAPI } from '../../apis/typeWork';
 function TypeWork({typeWorkID}) {
+   const obj=typeWorkID;
+    const parse=parseInt(obj.id)
   const [typeWork,setTypeWork]=useState([]);
   const getTypeWork=async()=>{
     try{
-      const data=await typeWorkAPI(typeWorkID);
+      const data=await typeWorkAPI(parse);
       setTypeWork(data.content)
     }
     catch(error){
@@ -28,7 +30,7 @@ function TypeWork({typeWorkID}) {
         </div>
       </div>
       <div className='mt-3'>
-        <h4 className='pl-3'>Most popular in </h4>
+        <h4 className='pl-3'>Most popular in {typeWork.tenLoaiCongViec} </h4>
       <div className="flex mt-3 list-work">
         <div className="flex-1 p-12 border border-gray-300 hover:shadow-lg transition-all detail-work">
           <div className="flex items-center">
