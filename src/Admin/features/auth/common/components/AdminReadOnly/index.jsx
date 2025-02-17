@@ -27,7 +27,7 @@ function AdminReadOnly() {
 
   const dispatch = useDispatch();
 
-  if (!authProfile) return <div></div>;
+  if (!authProfile) return <div>Loading...</div>;
 
   const {
     avatar,
@@ -60,70 +60,82 @@ function AdminReadOnly() {
 
   return (
     <div className="adminReadOnly">
-      <h1>Thông tin Admin</h1>
-      <div className="avatar">
-        <Avatar alt={name} src={avatar} />
-        <span>{name}</span>
-        <IconButton
-          color="primary"
-          aria-label="upload picture"
-          component="label"
-        >
-          <input
-            hidden
-            accept="image/*"
-            type="file"
-            onChange={handleUploadImg}
+      <div className="adminReadOnlyWrapper">
+        <div className="adminReadOnlyAvatar">
+          <Avatar
+            alt={name}
+            src={avatar}
+            sx={{ width: 100, height: 100 }}
           />
-          <PhotoCamera />
-        </IconButton>
-      </div>
-      <div className="profile">
-        <div className="profileGroup">
-          <p>
-            <span>Email:</span>
-            <span>{email}</span>
-          </p>
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="label"
+          >
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={handleUploadImg}
+            />
+            <PhotoCamera />
+          </IconButton>
         </div>
-        <div className="profileGroup">
-          <p>
-            <span>Ngày sinh:</span>
-            <span>{birthday}</span>
-          </p>
+        <div className="adminReadOnlyInfo">
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Họ tên:</p>
+            <p className="content">{name}</p>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Email:</p>
+            <p className="content">{email}</p>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Số điện thoại:</p>
+            <p className="content">{phone}</p>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Ngày sinh:</p>
+            <p className="content">{birthday}</p>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Giới tính:</p>
+            <p className="content">{gender}</p>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Chức vụ:</p>
+            <p className="content">{role}</p>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Kỹ năng:</p>
+            <div className="contentList">
+              {skill.map((item, index) => {
+                return (
+                  <p key={index} className="content">
+                    {item}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className="adminReadOnlyInfoItem">
+            <p className="label">Chứng chỉ:</p>
+            <div className="contentList">
+              {certification.map((item, index) => {
+                return (
+                  <p key={index} className="content">
+                    {item}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <div className="profileGroup">
-          <p>
-            <span>Giới tính:</span>
-            <span>{gender ? "Nam" : "Nữ"}</span>
-          </p>
+        <div className="adminReadOnlyAction">
+          <Button variant="contained" onClick={handleChangeCrudStatus}>
+            Chỉnh sửa
+          </Button>
         </div>
-        <div className="profileGroup">
-          <p>
-            <span>Số điện thoại:</span>
-            <span>{phone}</span>
-          </p>
-        </div>
-        <div className="profileGroup">
-          <p>
-            <span>Kỹ năng:</span>
-            <span>{skill.join(", ")}</span>
-          </p>
-        </div>
-        <div className="profileGroup">
-          <p>
-            <span>Chứng chỉ:</span>
-            <span>{certification.join(", ")}</span>
-          </p>
-        </div>
-        <div className="profileGroup">
-          <p>
-            <span>Quyền:</span>
-            <span>{role}</span>
-          </p>
-        </div>
-      </div>
-      <div className="action">
-        <Button onClick={handleChangeCrudStatus}>Cập nhật</Button>
       </div>
       <Dialog
         open={isOpenNotifyModal}
@@ -140,10 +152,7 @@ function AdminReadOnly() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseNotifyModal}>Hủy</Button>
-          <Button onClick={handleCloseNotifyModal} autoFocus>
-            Xác nhận
-          </Button>
+          <Button onClick={handleCloseNotifyModal}>OK</Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -118,15 +118,8 @@ function AdminUpdate() {
   };
 
   return (
-    <div className="userCreateWrapper">
-      <div className="comeBackAction">
-        <Button sx={{ fontSize: 20 }} onClick={handleComeBack}>
-          Quay lại
-        </Button>
-      </div>
-      <h1 className="title">Cập nhật người dùng</h1>
-      <form onSubmit={formik.handleSubmit} className="form">
-        {/* Form Group */}
+    <div className="adminUpdate">
+      <form onSubmit={formik.handleSubmit}>
         <div className="formGroup">
           {formik.touched.name && formik.errors.name ? (
             <TextField
@@ -135,7 +128,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
-              label="Tên:"
+              label="Họ tên:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -154,7 +147,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
-              label="Tên:"
+              label="Họ tên:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -166,7 +159,6 @@ function AdminUpdate() {
             />
           )}
         </div>
-        {/* Form Group */}
         <div className="formGroup">
           {formik.touched.email && formik.errors.email ? (
             <TextField
@@ -208,49 +200,6 @@ function AdminUpdate() {
             />
           )}
         </div>
-        {/* Form Group */}
-        <div className="formGroup">
-          {formik.touched.role && formik.errors.role ? (
-            <TextField
-              disabled
-              id="role"
-              name="role"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.role}
-              label="Quyền:"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <ManageAccountsIcon />
-                  </InputAdornment>
-                ),
-              }}
-              error
-              helperText={formik.errors.role}
-            />
-          ) : (
-            <TextField
-              disabled
-              id="role"
-              name="role"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.role}
-              label="Quyền:"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <ManageAccountsIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
-        </div>
-        {/* Form Group */}
         <div className="formGroup">
           {formik.touched.phone && formik.errors.phone ? (
             <TextField
@@ -259,7 +208,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              label="Tên:"
+              label="Số điện thoại:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -278,7 +227,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              label="Số ĐT:"
+              label="Số điện thoại:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -290,11 +239,9 @@ function AdminUpdate() {
             />
           )}
         </div>
-        {/* Form Group */}
         <div className="formGroup">
           {formik.touched.birthday && formik.errors.birthday ? (
             <TextField
-              type="date"
               id="birthday"
               name="birthday"
               onChange={formik.handleChange}
@@ -314,7 +261,6 @@ function AdminUpdate() {
             />
           ) : (
             <TextField
-              type="date"
               id="birthday"
               name="birthday"
               onChange={formik.handleChange}
@@ -332,36 +278,40 @@ function AdminUpdate() {
             />
           )}
         </div>
-        {/* Form Group */}
-        <div
-          className={`formGroup ${
-            formik.touched.gender && formik.errors.gender ? "error" : ""
-          }`}
-        >
-          <div className="wrapper">
-            <FormLabel id="demo-controlled-radio-buttons-group">
-              Gender
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="demo-controlled-radio-buttons-group"
-              name="gender"
-              id="gender"
-              value={formik.values.gender}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            >
-              <FormControlLabel value={false} control={<Radio />} label="Nữ" />
-              <FormControlLabel value={true} control={<Radio />} label="Nam" />
-            </RadioGroup>
-            {formik.touched.gender && formik.errors.gender ? (
-              <div className="errorMessage">{formik.errors.gender}</div>
-            ) : null}
-          </div>
+        <div className="formGroup">
+          <FormLabel id="gender">Giới tính:</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="gender"
+            name="gender"
+            value={formik.values.gender}
+            onChange={formik.handleChange}
+          >
+            <FormControlLabel value="MALE" control={<Radio />} label="Nam" />
+            <FormControlLabel value="FEMALE" control={<Radio />} label="Nữ" />
+          </RadioGroup>
         </div>
-        {/* Form Group */}
         <div className="formGroup">
           <TextField
-            multiline
+            disabled
+            id="role"
+            name="role"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.role}
+            label="Quyền:"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <ManageAccountsIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
+        <div className="formGroup">
+          <TextField
             id="skill"
             name="skill"
             onChange={formik.handleChange}
@@ -369,6 +319,8 @@ function AdminUpdate() {
             value={formik.values.skill}
             label="Kỹ năng:"
             variant="outlined"
+            multiline
+            rows={4}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -378,10 +330,8 @@ function AdminUpdate() {
             }}
           />
         </div>
-        {/* Form Group */}
         <div className="formGroup">
           <TextField
-            multiline
             id="certification"
             name="certification"
             onChange={formik.handleChange}
@@ -389,6 +339,8 @@ function AdminUpdate() {
             value={formik.values.certification}
             label="Chứng chỉ:"
             variant="outlined"
+            multiline
+            rows={4}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -398,12 +350,11 @@ function AdminUpdate() {
             }}
           />
         </div>
-        {/* Form Action */}
-        <div className="formAction">
-          <Button className="reset" onClick={formik.handleReset} type="reset">
-            Hủy
+        <div className="action">
+          <Button variant="contained" color="error" onClick={handleComeBack}>
+            Quay lại
           </Button>
-          <Button className="submit" type="submit">
+          <Button variant="contained" type="submit">
             Cập nhật
           </Button>
         </div>
@@ -440,10 +391,7 @@ function AdminUpdate() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseFailModal}>Hủy</Button>
-          <Button onClick={handleCloseFailModal} autoFocus>
-            Xác nhận
-          </Button>
+          <Button onClick={handleCloseFailModal}>OK</Button>
         </DialogActions>
       </Dialog>
     </div>
