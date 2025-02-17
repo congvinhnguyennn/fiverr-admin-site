@@ -4,9 +4,7 @@ import * as Yup from "yup";
 
 import "./globalStyles.scss";
 import {
-  Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
@@ -15,15 +13,16 @@ import {
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
-import { useDispatch } from "react-redux";
-import { fetchSetAuthProfileAction } from "Admin/features/auth/action";
 import { useNavigate } from "react-router-dom";
 
+// Hardcoded admin credentials
+const ADMIN_CREDENTIALS = {
+  email: "admin@admin.com",
+  password: "admin123",
+};
+
 function SignIn() {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const [isOpenConfirm, setIsOpenConfirm] = useState(false);
   const [confirmConfig, setConfirmConfig] = useState({
     type: "Notification",
@@ -33,7 +32,7 @@ function SignIn() {
   useEffect(() => {
     const authProfile = localStorage.getItem("authProfile");
     if (authProfile) navigate("/manage/user");
-  });
+  }, [navigate]);
 
   const handleClose = () => {
     setIsOpenConfirm(false);
@@ -50,14 +49,31 @@ function SignIn() {
         .required("*Please enter your email!"),
       password: Yup.string().required("*Please enter your password!"),
     }),
-    onSubmit: async (values) => {
-      const res = await dispatch(fetchSetAuthProfileAction(values));
-
-      if (res.type !== "Success") {
-        setConfirmConfig(res);
-        setIsOpenConfirm(true);
-      } else {
+    onSubmit: (values) => {
+      // Check credentials against hardcoded admin values
+      if (
+        values.email === ADMIN_CREDENTIALS.email &&
+        values.password === ADMIN_CREDENTIALS.password
+      ) {
+        const authProfile = {
+          id: "admin-1",
+          token: "demo-token",
+          user: {
+            id: "admin-1",
+            name: "Admin",
+            email: ADMIN_CREDENTIALS.email,
+            role: "ADMIN",
+            avatar: "",
+          },
+        };
+        localStorage.setItem("authProfile", JSON.stringify(authProfile));
         navigate("/manage");
+      } else {
+        setConfirmConfig({
+          type: "Error",
+          content: "Invalid email or password!",
+        });
+        setIsOpenConfirm(true);
       }
     },
   });
@@ -158,20 +174,17 @@ function SignIn() {
       <Dialog
         open={isOpenConfirm}
         onClose={handleClose}
-        aria-labelledby="draggable-dialog-title"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+        <DialogTitle id="alert-dialog-title">
           {confirmConfig.type}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>{confirmConfig.content}</DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            {confirmConfig.content}
+          </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose}>OK</Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
