@@ -80,13 +80,13 @@ const fetchUpdateAdminProfileAction = (data) => {
       dispatch(authActionTypes.setAuthProfile(data));
       
       return {
-        type: "Chúc mừng!",
-        content: "Cập nhật thành công",
+        type: "Success!",
+        content: "Profile updated successfully!",
       };
     } catch (error) {
       return {
-        type: "Có lỗi xảy ra!",
-        content: "Không thể cập nhật thông tin",
+        type: "Error",
+        content: "Unable to update profile",
       };
     }
   };
@@ -110,12 +110,12 @@ const fetchUploadImageAction = (data) => {
 
       return {
         type: "Success",
-        content: "Đăng ảnh thành công!",
+        content: "Image uploaded successfully!",
       };
     } catch (error) {
       return {
         type: "Error",
-        content: "Có lỗi xảy ra!",
+        content: "Failed to upload image",
       };
     }
   };

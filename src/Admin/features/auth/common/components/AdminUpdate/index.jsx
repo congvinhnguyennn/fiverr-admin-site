@@ -36,8 +36,8 @@ function AdminUpdate() {
   const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
   const [isOpenFailModal, setIsOpenFailModal] = useState(false);
   const [modalConfig, setModalConfig] = useState({
-    type: "Chúc mừng",
-    content: "Chúc mừng, tạo thành công!",
+    type: "Congratulations",
+    content: "Successfully created!",
   });
 
   const dispatch = useDispatch();
@@ -58,24 +58,24 @@ function AdminUpdate() {
       gender: gender,
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("*Hãy nhập tên!"),
+      name: Yup.string().required("*Please enter your name!"),
       email: Yup.string()
-        .email("*Kiểu email của bạn chưa chính xác (*@*mail.*)")
-        .required("*Hãy nhập email!"),
+        .email("*Please enter a valid email address (*@*mail.*)")
+        .required("*Please enter your email!"),
       phone: Yup.string()
-        .required("*Hãy nhập số điện thoại!")
+        .required("*Please enter your phone number!")
         .matches(
           /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g,
-          "*Số điện thoại chưa chính xác!"
+          "*Invalid phone number!"
         )
-        .min(10, "*Số điện thoại phải có ít nhất 10 số!"),
+        .min(10, "*Phone number must be at least 10 digits!"),
       birthday: Yup.string()
-        .required("*Hãy nhập ngày sinh!")
+        .required("*Please enter your birthday!")
         .matches(
           /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/i,
-          "*Ngày sinh chưa đúng!"
+          "*Invalid birthday format!"
         ),
-      gender: Yup.string().required("*Hãy nhập giới tính!"),
+      gender: Yup.string().required("*Please select your gender!"),
     }),
     onSubmit: async (values) => {
       const customDate = getDayMonthYear(values.birthday);
@@ -95,7 +95,7 @@ function AdminUpdate() {
 
       setModalConfig(res);
 
-      if (res.type === "Chúc mừng!") {
+      if (res.type === "Success!") {
         setIsOpenSuccessModal(true);
       } else {
         setIsOpenFailModal(true);
@@ -128,7 +128,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
-              label="Họ tên:"
+              label="Full Name:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -147,7 +147,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
-              label="Họ tên:"
+              label="Full Name:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -208,7 +208,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              label="Số điện thoại:"
+              label="Phone:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -227,7 +227,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              label="Số điện thoại:"
+              label="Phone:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -247,7 +247,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.birthday}
-              label="Ngày sinh:"
+              label="Birthday:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -266,7 +266,7 @@ function AdminUpdate() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.birthday}
-              label="Ngày sinh:"
+              label="Birthday:"
               variant="outlined"
               InputProps={{
                 startAdornment: (
@@ -279,7 +279,7 @@ function AdminUpdate() {
           )}
         </div>
         <div className="formGroup">
-          <FormLabel id="gender">Giới tính:</FormLabel>
+          <FormLabel id="gender">Gender:</FormLabel>
           <RadioGroup
             row
             aria-labelledby="gender"
@@ -287,8 +287,8 @@ function AdminUpdate() {
             value={formik.values.gender}
             onChange={formik.handleChange}
           >
-            <FormControlLabel value="MALE" control={<Radio />} label="Nam" />
-            <FormControlLabel value="FEMALE" control={<Radio />} label="Nữ" />
+            <FormControlLabel value="MALE" control={<Radio />} label="Male" />
+            <FormControlLabel value="FEMALE" control={<Radio />} label="Female" />
           </RadioGroup>
         </div>
         <div className="formGroup">
@@ -299,7 +299,7 @@ function AdminUpdate() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.role}
-            label="Quyền:"
+            label="Role:"
             variant="outlined"
             InputProps={{
               startAdornment: (
@@ -317,7 +317,7 @@ function AdminUpdate() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.skill}
-            label="Kỹ năng:"
+            label="Skills:"
             variant="outlined"
             multiline
             rows={4}
@@ -337,7 +337,7 @@ function AdminUpdate() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.certification}
-            label="Chứng chỉ:"
+            label="Certifications:"
             variant="outlined"
             multiline
             rows={4}
@@ -352,10 +352,10 @@ function AdminUpdate() {
         </div>
         <div className="action">
           <Button variant="contained" color="error" onClick={handleComeBack}>
-            Quay lại
+            Back
           </Button>
           <Button variant="contained" type="submit">
-            Cập nhật
+            Update
           </Button>
         </div>
       </form>
@@ -372,9 +372,9 @@ function AdminUpdate() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseSuccessModal}>Hủy</Button>
+          <Button onClick={handleCloseSuccessModal}>Cancel</Button>
           <Button onClick={handleSubmitSuccessModal} autoFocus>
-            Xác nhận
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>

@@ -19,8 +19,8 @@ import "./globalStyles.scss";
 function AdminReadOnly() {
   const [isOpenNotifyModal, setIsOpenNotifyModal] = useState(false);
   const [notifiModalConfig, setNotifyModalConfig] = useState({
-    type: "notify",
-    content: "Notify",
+    type: "Notification",
+    content: "Notification",
   });
 
   const { authProfile } = useSelector((state) => state.authReducer);
@@ -83,7 +83,7 @@ function AdminReadOnly() {
         </div>
         <div className="adminReadOnlyInfo">
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Họ tên:</p>
+            <p className="label">Full Name:</p>
             <p className="content">{name}</p>
           </div>
           <div className="adminReadOnlyInfoItem">
@@ -91,23 +91,23 @@ function AdminReadOnly() {
             <p className="content">{email}</p>
           </div>
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Số điện thoại:</p>
+            <p className="label">Phone:</p>
             <p className="content">{phone}</p>
           </div>
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Ngày sinh:</p>
+            <p className="label">Birthday:</p>
             <p className="content">{birthday}</p>
           </div>
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Giới tính:</p>
+            <p className="label">Gender:</p>
             <p className="content">{gender}</p>
           </div>
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Chức vụ:</p>
+            <p className="label">Role:</p>
             <p className="content">{role}</p>
           </div>
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Kỹ năng:</p>
+            <p className="label">Skills:</p>
             <div className="contentList">
               {skill.map((item, index) => {
                 return (
@@ -119,7 +119,7 @@ function AdminReadOnly() {
             </div>
           </div>
           <div className="adminReadOnlyInfoItem">
-            <p className="label">Chứng chỉ:</p>
+            <p className="label">Certifications:</p>
             <div className="contentList">
               {certification.map((item, index) => {
                 return (
@@ -133,7 +133,7 @@ function AdminReadOnly() {
         </div>
         <div className="adminReadOnlyAction">
           <Button variant="contained" onClick={handleChangeCrudStatus}>
-            Chỉnh sửa
+            Edit Profile
           </Button>
         </div>
       </div>
